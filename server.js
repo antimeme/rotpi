@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 // Quick-and-dirty web server using Node.js
+// Republic Of Techies (RoT) group project.
 var sys = require('sys');
 var http = require('http');
 var fs = require('fs');
