@@ -29,4 +29,22 @@ var LED = function (pinNumber, ledState) {
 	}
 }
 
-module.exports = LED;
+var LEDBatch = function(ledArray, stateArray) {
+	if(!Array.isArray(ledArray) || !Array.isArray(stateArray)){
+		 throw new Error('parameters must both be array data types');
+	}
+
+	for (var i = 0; i < ledArray.length; i++){
+		var led = new Gpio(ledArray[i], 'out');
+
+		if (stateArray[i] === 'off') {
+			led.unexport();
+		}
+		else {
+			led.write(1);
+		}
+	}
+}
+
+exports.LED = LED;
+exports.LEDBatch = LEDBatch;

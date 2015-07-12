@@ -18,8 +18,8 @@ if (isNaN(pinNumber) || isNaN(blinkLength)) {
 	process.exit(1);
 }
 
-ledController(pinNumber, 'on');
+ledController.LED(pinNumber, 'on');
 
 setTimeout(function() {
-	ledController(pinNumber, 'off')
+	ledController.LED(pinNumber, 'off')
 }, blinkLength * 1000);
