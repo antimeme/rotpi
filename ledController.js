@@ -15,6 +15,10 @@ all LEDs off before ending the program.
 var Gpio = require('onoff').Gpio;
 
 var LED = function (pinNumber, ledState) {
+	if (isNaN(pinNumber)) {
+		throw new Error('Invalid pin number');
+	}
+
 	var led = new Gpio(pinNumber, 'out');
 
 	if (ledState === 'off') {
