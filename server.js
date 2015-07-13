@@ -15,7 +15,7 @@ http.createServer(function(request, response) {
     if (url === '/time') {
         response.writeHeader(200, {
             "Context-Type": "text/plain",
-            "Access-Control-Allow-Origin": "http://localhost/"});
+            "Access-Control-Allow-Origin": "http://localhost"});
         response.write(new Date().toString());
         response.end();
     }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- client.html -->
+
+<html>
+
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Jorge L. Rodriguez">
+    <meta name="keywords" content="client, RoT, Republic-of-Techies"> 
+    <meta name="description" content="Client program">
+    
+    <title>Simple Client Program</title>
+    
+    <link rel="stylesheet" type="text/css" href="styles/client.css">
+    
+    <script src="bin/jquery-2.1.4.min.js"></script>
+    <script src="bin/jquery.ajax-cross-origin.min.js"></script>
+    <script src="bin/jquery.tinyscrollbar.js"></script>
+    <script src="bin/client.js"></script>
+    
+  </head>
+  
+  <body>
+    
+    <section>
+      <div class="scrollbar">
+        <div class="track">
+          <div class="thumb">
+            <div class="end">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="viewport">
+        <div id="content" class="overview" >
+        </div>
+      </div>
+    </section>
+    
+    <section>
+      <span id="status">Connecting...</span>
+      <input id="input" type="text" disabled="disabled" >
+    </section>
+    
+  </body>
+  
+</html>
