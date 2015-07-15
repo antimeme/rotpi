@@ -68,7 +68,7 @@ var LED = function() {
 		
 		for (var p in arguments[i]) {
 			if (p != 'delay'){
-				runTimeout(p,arguments[i][p], totalDelay * 1000);
+				runTimeout(p,arguments[i][p], totalDelay);
 			}
 		}
 	}
