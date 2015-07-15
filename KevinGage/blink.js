@@ -1,25 +1,14 @@
 /*
 Written by Kevin Gage on 7/12/2015
 
-Test turning on an led for a set period of time using ledController.js script.
+Testing the LEDBatch function from ledController.js using LED's on GPIO pins
+17, 22, and 19 
 
-Usage: node blink.js {gpio pin} {time in seconds}
-
-Example Usage: node blink.js 17 10
-this example will turn an LED on gpio pin 17 for 10 seconds
+uasge: node blinkBatch.js
 */
 
 var ledController = require('../ledController.js');
-var pinNumber = process.argv[2];
-var blinkLength = process.argv[3];
 
-if (isNaN(pinNumber) || isNaN(blinkLength)) {
-	console.log('Invalid pin number or blink length');
-	process.exit(1);
-}
-
-ledController.LED(pinNumber, true);
-
-setTimeout(function() {
-	ledController.LED(pinNumber, false)
-}, blinkLength * 1000);
+ledController.LED({delay:0, 17:true, 22:true, 19:true},{delay:2, 22:false},{delay:3, 17:false, 22:false, 19:false}, function(err){
+	console.log(err);
+});
