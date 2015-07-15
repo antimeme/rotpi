@@ -38,23 +38,41 @@
                          '<h1>Internal Error</h1>',
                          '<p>Oops!  Something went wrong.</p>']
                         .join('\n'));
+                console.log(ex);
             }
         };
     };
 
+    // Santize a URL.  There are NPM packages which do this kind of
+    // thing better but this is more fun and security stakes are low.
+    var urlify = function(url) {
+        var result = [], index, pops = 0;
+        var s = url.replace(/[^\/a-zA-Z0-9_-]/g, '').split('/');
+        for (index = 0; index < s.length; ++index) {
+            if (s[index] === '.')
+                continue;
+            else if (s[index] === '..')
+                result.pop();
+            else result.push(s[index]);
+        }
+        return result.join('/');
+    };
+
     http.createServer(careful(function(request, response) {
-        var url = request.url;
+        var url = urlify(request.url);
         if (url === '/')
             url = '/index.html';
 
+        // Server implemented services
         if (url === '/time') {
             respond(response, 200, {
                 "Context-Type": "text/plain",
                 "Access-Control-Allow-Origin": "http://localhost"},
                     new Date().toString());
-        } else if (url === '/error')
-            throw request;
+            return;
+        }
 
+        // Otherwise unrecognized URLs are treated as file paths
         fs.readFile(path.join('.', url), function (err, data) {
             if (err) {
                 if (err.code === 'ENOENT')
