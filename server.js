@@ -16,6 +16,17 @@
         response.end();
     };
 
+    var errorpage = function(response, url, code) {
+        fs.readFile('errorpages/page' + code + '.html',
+                    function(err, data) {
+                        if (err)
+                            throw err;
+                        respond(response, code, {
+                            'Content-Type': 'text/html'},
+                                data.toString()
+                                .replace(/:PATH:/g, url)); });
+    };
+
     var careful = function(fn) {
         return function(request, response) {
             try {
@@ -46,36 +57,18 @@
 
         fs.readFile(path.join('.', url), function (err, data) {
             if (err) {
-                if (err.code === 'ENOENT') {
-                    fs.readFile(
-                        'errorpages/page404.html',
-                        function(err, data) {
-                            if (err)
-                                throw err;
-                            respond(response, 404, {
-                                "Content-Type": "text/html"},
-                                    data.toString()
-                                    .replace(/:PATH:/g, url));
-                        });
-                } else if (err.code === 'EACCES') {
-                    fs.readFile(
-                        'errorpages/page403.html',
-                        function(err, data) {
-                            if (err)
-                                throw err;
-                            respond(response, 403, {
-                                "Content-Type": "text/html"},
-                                    data.toString()
-                                    .replace(/:PATH:/g, url));
-                        });
-                } else throw err;
+                if (err.code === 'ENOENT')
+                    errorpage(response, url, 404);
+                else if (err.code === 'EACCES')
+                    errorpage(response, url, 403);
+                else throw err;
             } else {
                 // :TODO: determine content type --
                 //   by file extension?
                 //   by contents?
                 //   a combination of both?
                 respond(response, 200, {
-                    "Content-Type": "text/html"}, data);
+                    'Content-Type': 'text/html'}, data);
             }
         });
     })).listen(port);
