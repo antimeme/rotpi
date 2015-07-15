@@ -16,7 +16,22 @@
         response.end();
     };
 
-    http.createServer(function(request, response) {
+    var careful = function(fn) {
+        return function(request, response) {
+            try {
+                fn.apply(this, arguments);
+            } catch (ex) {
+                respond(response, 500, {'Content-Type': 'text/html'},
+                        ['<!DOCTYPE html>',
+                         '<title>Internal Error</title>',
+                         '<h1>Internal Error</h1>',
+                         '<p>Oops!  Something went wrong.</p>']
+                        .join('\n'));
+            }
+        };
+    };
+
+    http.createServer(careful(function(request, response) {
         var url = request.url;
         if (url === '/')
             url = '/index.html';
@@ -26,17 +41,29 @@
                 "Context-Type": "text/plain",
                 "Access-Control-Allow-Origin": "http://localhost"},
                     new Date().toString());
-        }
+        } else if (url === '/error')
+            throw request;
 
         fs.readFile(path.join('.', url), function (err, data) {
             if (err) {
                 if (err.code === 'ENOENT') {
                     fs.readFile(
-                        'page404.html',
+                        'errorpages/page404.html',
                         function(err, data) {
                             if (err)
                                 throw err;
                             respond(response, 404, {
+                                "Content-Type": "text/html"},
+                                    data.toString()
+                                    .replace(/:PATH:/g, url));
+                        });
+                } else if (err.code === 'EACCES') {
+                    fs.readFile(
+                        'errorpages/page403.html',
+                        function(err, data) {
+                            if (err)
+                                throw err;
+                            respond(response, 403, {
                                 "Content-Type": "text/html"},
                                     data.toString()
                                     .replace(/:PATH:/g, url));
@@ -51,6 +78,6 @@
                     "Content-Type": "text/html"}, data);
             }
         });
-    }).listen(port);
+    })).listen(port);
     console.log('Server listening: http://localhost:' + port + '/');
 })();
