@@ -9,13 +9,8 @@ uasge: node blinkBatch.js
 
 var ledController = require('../ledController.js');
 
-ledController.LEDBatch([17,22,19], ['on','off','on']);
+var mybatch = [{delay:1, 17:true, 22:true, 19:true},{delay:2, 22:false},{delay:3, 17:false, 22:false, 19:false}];
 
-setTimeout(function() {
-        ledController.LEDBatch([17,22,19],['off',,'off']);
-
-	setTimeout(function() {
-		ledController.LEDBatch([17,22,19],['off','off','off']);
-	}, 2000);
-}, 5000);
-
+ledController.LEDBatch(mybatch, function(err){
+	console.log(err);
+});
