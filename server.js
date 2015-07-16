@@ -50,7 +50,7 @@
     // thing better but this is more fun and security stakes are low.
     var urlify = function(url) {
         var result = [], index, pops = 0;
-        var s = url.replace(/[^\/a-zA-Z0-9_-]/g, '').split('/');
+        var s = url.replace(/[^\/a-zA-Z0-9._-]/g, '').split('/');
         for (index = 0; index < s.length; ++index) {
             if (s[index] === '.')
                 continue;
