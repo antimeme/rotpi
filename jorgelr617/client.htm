@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- client.html -->
+<!-- client.htm -->
 
 <html>
 
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Jorge L. Rodriguez">
-    <meta name="keywords" content="client, RoT, Republic-of-Techies"> 
+    <meta name="keywords" content="client, RoT, Republic-of-Techies">
     <meta name="description" content="Client program">
     
     <title>Simple Client Program</title>
@@ -17,33 +17,37 @@
     <link rel="stylesheet" type="text/css" href="styles/client.css">
     
     <script src="bin/jquery-2.1.4.min.js"></script>
+    <script src="bin/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="bin/jquery.ajax-cross-origin.min.js"></script>
-    <script src="bin/jquery.tinyscrollbar.js"></script>
     <script src="bin/client.js"></script>
     
   </head>
   
   <body>
+  
+    <div id="main">
     
-    <section>
-      <div class="scrollbar">
-        <div class="track">
-          <div class="thumb">
-            <div class="end">
-            </div>
-          </div>
-        </div>
+      <div id="left-side">
+        <h2>User Inputs </h2>
+        <textarea id="input1">
+        </textarea>
+        <button type="button">Submit inputs</button><br>
+        <br>
+        <button type="button">Load inputs</button>
+        <button type="button">Save inputs</button>
+        <button type="button">Load Config</button>
+        
       </div>
-      <div class="viewport">
-        <div id="content" class="overview" >
-        </div>
+      
+      <div id="right-side">
+        <h2>Inputs History</h2>
+        <textarea id="input2">
+        </textarea>
+        <button type="button">Save History</button>
+        
       </div>
-    </section>
-    
-    <section>
-      <span id="status">Connecting...</span>
-      <input id="input" type="text" disabled="disabled" >
-    </section>
+     
+    </div>
     
   </body>
   

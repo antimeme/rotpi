@@ -1,5 +1,5 @@
 /* Client's script. */
-$(function () 
+$(function ()
 {
   //Defines that JavaScript code that should be executed in "strict mode".
   //It is not a statement, but a literal expression, ignored by earlier versions of JavaScript.
@@ -9,9 +9,11 @@ $(function ()
   "use strict";
   
   //For better performance - to avoid searching in DOM.
-  var content = $('#content');
-  var input = $('#input');
-  var status = $('#status');
+  var inputs = $("#input1");
+  var history = $("#input2");
+  
+  //Change all HTML buttons to JQuery UI buttons.
+  $("button").button();
   
   //Get the server's time.
   function get_time() 
@@ -37,12 +39,12 @@ $(function ()
   }
   
   //Get the actual server time.
-  get_time();
+  //get_time();
   
   /**
    * Send message when user presses the Enter key.
    */
-  input.on
+  inputs.on
   (
     'keydown',
     function(event)
@@ -58,24 +60,13 @@ $(function ()
         //Clear the message. 
         $(this).val('');
         
-        //Disable the input field to make the user waits until server
+        //Disable the input field to make the user wait until server
         //sends back response.
         input.attr('disabled', 'disabled');
-  
+        
       }
     }
   );
-    
-  /**
-   *  Make it a little more user friendly
-   */
-  var scrollbar = $('body > section:first').tinyscrollbar();
-  
-  function slideScrollbar() 
-  {
-    scrollbar.update();
-    scrollbar.move(Math.max(0, content.find('> p').length - 9) * 18);
-  }
     
 });
 
