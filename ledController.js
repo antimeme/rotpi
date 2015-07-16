@@ -31,7 +31,7 @@ var SetState = function (pinNumber, ledState) {
 
 
 /*
-This function is called with at least two arguments.  All arguments except for the last one should be a java object which contains a delay and 
+This function is called with two arguments.  All arguments except for the last one should be a java object which contains a delay and 
 at least one pin:state pair.
 each gpio pin represents a connection to a LED 
 exampe: {delay: value, gpio#: bool, gpio#: bool}
@@ -40,18 +40,18 @@ The final argument should be a callback function that takes one argument.  The c
 example LED({delay: 0, 1: true, 2: true, 3: true}, {delay: 5, 1: false, 2: false}, function(er){console.log(er)})
 */
 
-var LED = function() {
-
-	var error = LEDVerify(arguments);
-
+var LED = function(ledInstructions, cb) {
+	
 	//check that last argument is callback function. can't respond with callback since we didn't get it...
-	if (typeof(arguments[arguments.length - 1]) != 'function') {
-		var error = 'Invalid callback function passed to LED: ' + JSON.stringify(arguments[arguments.length - 1]);
+	if (typeof(cb) != 'function') {
+		var error = 'Invalid callback function passed to LED: ' + JSON.stringify(cb);
 		throw error;
 	}
 
+	var error = LEDVerify(ledInstructions, cb);
+
 	if (error != '') {
-		arguments[arguments.length - 1](error);
+		cb(error);
 		return;
 	}
 
@@ -63,45 +63,44 @@ var LED = function() {
 		}, delay);
 	}
 
-	for (var i = 0; i < arguments.length - 1; i++){
-		totalDelay += arguments[i].delay;
+	for (var i = 0; i < ledInstructions.length; i++){
+		totalDelay += ledInstructions[i].delay;
 		
-		for (var p in arguments[i]) {
+		for (var p in ledInstructions[i]) {
 			if (p != 'delay'){
-				runTimeout(p,arguments[i][p], totalDelay);
+				runTimeout(p,ledInstructions[i][p], totalDelay);
 			}
 		}
 	}
 	
-	arguments[arguments.length - 1](error);
+	cb(error);
 }
 
 /*
-This function is used to verify all of the information that is passed to LED and gracefully handle errors
+This function is used to verify the information that is passed to LED and gracefully handle errors
 */
-function LEDVerify(){ 
-	arguments = arguments[0];
+function LEDVerify(ledInstructions, cb){ 
 
-	//make sure there are at least 2 arguments
-	if (arguments.length < 2) {
-		return 'Invalid call to LED.  Must contain at least two arguments.  One object and one callback function';
+	//make sure ledInstructions is an array
+	if (!(ledInstructions instanceof Array)) {
+		return 'Invalid array passed to LED: ' +  JSON.stringify(ledInstructions);
 	}
-	
-	for (var i = 0; i < arguments.length - 1; i++) {
+
+	for (var i = 0; i < ledInstructions.length; i++) {
 		//check all arguments before last to make sure they have a delay and its value is a number
-		if (isNaN(arguments[i].delay)){
-			return 'Invalid delay value found in object passed to LED: ' +  JSON.stringify(arguments[i]);
+		if (isNaN(ledInstructions[i].delay)){
+			return 'Invalid delay value found in object passed to LED: ' +  JSON.stringify(ledInstructions[i]);
 		}
 		
-		for (var p in arguments[i]){
-			//check all arguments before last to make sure their properties are numbers, other than delay
+		for (var p in ledInstructions[i]){
+			//check all objects in ledInstructions array to make sure their properties are numbers, other than delay
 			if (p != 'delay' && isNaN(p)){
-				return 'Invalid gpio value found in object passed to LED. Must be a number: ' +  JSON.stringify(arguments[i]);
+				return 'Invalid gpio value found in object passed to LED. Must be a number: ' +  JSON.stringify(ledInstructions[i]);
 			}
 			
-			//check all arguments before last to make sure their property values are bool, other than delay
-			if (p != 'delay' && arguments[i][p] != true && arguments[i][p] != false) {
-				return 'Invalid light state found in object passed to LEDBatch.  Must be bool: ' + JSON.stringify(arguments[i]);
+			//check all objects in ledInstructions array to make sure their property values are bool, other than delay
+			if (p != 'delay' && ledInstructions[i][p] != true && ledInstructions[i][p] != false) {
+				return 'Invalid light state found in object passed to LEDBatch.  Must be bool: ' + JSON.stringify(ledInstructions[i]);
 			}
 		}
 	}
