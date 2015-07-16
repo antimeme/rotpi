@@ -10,13 +10,15 @@
     var path = require('path');
     var port = 8080;
 
+    // Responds to normal requests with control over headers
     var respond = function(response, code, headers, data) {
         response.writeHeader(code, headers);
         response.write(data);
         response.end();
     };
 
-    var errorpage = function(response, url, code) {
+    // Responds to error conditions using a file template
+    var errorpage = function(response, code, url) {
         fs.readFile('errorpages/page' + code + '.html',
                     function(err, data) {
                         if (err)
@@ -27,6 +29,7 @@
                                 .replace(/:PATH:/g, url)); });
     };
 
+    // Wrapper around HTTP response function that handles exceptions
     var careful = function(fn) {
         return function(request, response) {
             try {
@@ -65,29 +68,28 @@
 
         // Server implemented services
         if (url === '/time') {
-            respond(response, 200, {
+            return respond(response, 200, {
                 "Context-Type": "text/plain",
                 "Access-Control-Allow-Origin": "http://localhost"},
-                    new Date().toString());
-            return;
+                           new Date().toString());
         }
 
         // Otherwise unrecognized URLs are treated as file paths
         fs.readFile(path.join('.', url), function (err, data) {
             if (err) {
                 if (err.code === 'ENOENT')
-                    errorpage(response, url, 404);
+                    return errorpage(response, 404, url);
                 else if (err.code === 'EACCES')
-                    errorpage(response, url, 403);
+                    return errorpage(response, 403, url);
                 else throw err;
-            } else {
-                // :TODO: determine content type --
-                //   by file extension?
-                //   by contents?
-                //   a combination of both?
-                respond(response, 200, {
-                    'Content-Type': 'text/html'}, data);
             }
+
+             // :TODO: determine content type --
+            //   by file extension?
+            //   by contents?
+            //   a combination of both?
+            return respond(response, 200, {
+                'Content-Type': 'text/html'}, data);
         });
     })).listen(port);
     console.log('Server listening: http://localhost:' + port + '/');
