@@ -1,31 +1,39 @@
-/* Client's CSS. */
+/* Client's styles. */
 
 #main
 { 
   margin-top: 25px;
   margin-bottom: 25px;
   margin-left: 25px;
-  background: lightgray;
+  background: CornflowerBlue;
+  width: 700px;
+  height: 425px;
+  border-radius: 25px;
 }
 
 #left-side    
 {
-  width: 40%;
+  width: 45%;
   height: 400px;
-  background: lightgray;
+  background: LightGray;
+  margin-top: 10px;
+  margin-left: 10px;
   margin-right: 10px;
   float: left;
   text-align: center;
+  border-radius: 25px;
 }
 
 #right-side  
 {
-  width: 40%;
+  width: 49%;
   height: 400px;
-  background: lightgray;
+  background: LightGray;
+  margin-top: 10px;
   margin-left: 10px;
   float: left;
   text-align: center;
+  border-radius: 25px;
 }
 
 #input1 { border-radius: 5px; border:1px solid #ccc; margin-left: 0px;
