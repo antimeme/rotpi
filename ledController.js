@@ -25,19 +25,20 @@ var SetState = function (pinNumber, ledState) {
 		led.unexport();
 	}
 	else{
-		led.writeSync(1);
+		led.write(1);
 	}
 }
 
 
 /*
-This function is called with two arguments.  All arguments except for the last one should be a java object which contains a delay and 
-at least one pin:state pair.
+This function is called with two arguments.  The first argument should be an array of java objects 
+each of which contains a delay and at least one pin:state pair.
 each gpio pin represents a connection to a LED 
 exampe: {delay: value, gpio#: bool, gpio#: bool}
-The final argument should be a callback function that takes one argument.  The callback function will be passed an error message if an error occurs
+The second argument should be a callback function that takes one argument.  
+The callback function will be passed an error message if an error occurs
 
-example LED({delay: 0, 1: true, 2: true, 3: true}, {delay: 5, 1: false, 2: false}, function(er){console.log(er)})
+example LED([{delay: 0, 1: true, 2: true, 3: true}, {delay: 5, 1: false, 2: false}], function(er){console.log(er)})
 */
 
 var LED = function(ledInstructions, cb) {
