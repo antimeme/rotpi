@@ -95,10 +95,10 @@
 					var ledCommand = post['ledCommand'];
 					
 					ledController.LED(ledCommand, function (err) {
-						return respond(response, 200, {
-							"Context-Type": "text/plain",
-							"Access-Control-Allow-Origin": "http://localhost"},
-							err);
+						//return respond(response, 200, {"Context-Type": "text/plain"},err);
+						response.writeHeader(200, {'Content-Type': 'text/plain'});
+						response.write(err);
+						response.end();
 					});
 				});
 			}
