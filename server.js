@@ -94,8 +94,8 @@
 
 					var ledCommand = post['ledCommand'].split("_");
 					
-					for (var i = 0; i < ledCommand.length, i++) {
-						s[i] = JSON.parse(s[i]);
+					for (var i = 0; i < ledCommand.length; i++) {
+						ledCommand[i] = JSON.parse(ledCommand[i]);
 					}
 					
 					console.log("sending this command to led controller: " + ledCommand);
