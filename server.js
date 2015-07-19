@@ -92,7 +92,7 @@
 				request.on('end', function () {
 					var post = qs.parse(postData);
 
-					var ledCommand = post['ledCommand'];
+					var ledCommand = post['ledCommand'].split("_");
 					
 					ledController.LED(ledCommand, function (err) {
 						//return respond(response, 200, {"Context-Type": "text/plain"},err);
