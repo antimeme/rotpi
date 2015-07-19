@@ -8,6 +8,8 @@
     var http = require('http');
     var fs = require('fs');
     var path = require('path');
+	var ledController = require('./ledController.js');
+	var qs = require('querystring');
     var port = 8080;
 
     // Responds to normal requests with control over headers
@@ -73,6 +75,35 @@
                 "Access-Control-Allow-Origin": "http://localhost"},
                            new Date().toString());
         }
+		
+		//Listener page for LED AJAX calls.  Added by KevinGage
+		//Expects HTTP POST value called ledCommand
+		if (url == '/LED') {
+			if (request.method == 'POST') {
+				var postData = '';
+				request.on('data', function (data) {
+					postData += data;
+
+					// Too much POST data, kill the connection!
+					if (postData.length > 1e6) {
+						request.connection.destroy();
+					}
+				});
+				request.on('end', function () {
+					var post = qs.parse(body);
+
+					// use post['blah'], etc.
+					var ledCommand = post['ledCommand'];
+					
+					ledController.LED(ledCommand, function (err) {
+						return respond(response, 200, {
+							"Context-Type": "text/plain",
+							"Access-Control-Allow-Origin": "http://localhost"},
+							err);
+					});
+				});
+			}
+		}
 
         // Otherwise unrecognized URLs are treated as file paths
         fs.readFile(path.join('.', url), function (err, data) {
