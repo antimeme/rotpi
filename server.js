@@ -94,11 +94,18 @@
 
 					var ledCommand = post['ledCommand'].split("_");
 					
+					console.log("sending this command to led controller: " + ledCommand);
+					
 					ledController.LED(ledCommand, function (err) {
 						//return respond(response, 200, {"Context-Type": "text/plain"},err);
+						console.log("setting header");
 						response.writeHeader(200, {'Content-Type': 'text/plain'});
+						console.log("sending respsonse");
 						response.write(err);
+						console.log("ending response");
 						response.end();
+						console.log("returning");
+						return "";
 					});
 				});
 			}
