@@ -90,9 +90,8 @@
 					}
 				});
 				request.on('end', function () {
-					var post = qs.parse(body);
+					var post = qs.parse(postData);
 
-					// use post['blah'], etc.
 					var ledCommand = post['ledCommand'];
 					
 					ledController.LED(ledCommand, function (err) {
