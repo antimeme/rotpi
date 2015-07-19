@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kevin Gage First LED Interface</title>
+<link rel="stylesheet" type="text/css" href="styles/stylesheet_led1.css">
+<script type='text/javascript' src='../jorgelr617/bin/jquery-2.1.4.min.js'></script>
+
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.post("/LED",
+		{
+			ledCommand: document.getElementById('ledCommand').value
+		},
+		function(data, status){
+			alert("Data: " + data + "\nStatus: " + status);
+		});
+	});
+});
+</script>
+</head>
+<body>
+	<form>
+		LED Command to Send: <input type="text" id="ledCommand"><br>
+		<button>Send Command</button>
+	</form>
+</body>
+</html>
