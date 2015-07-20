@@ -9,22 +9,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Jorge L. Rodriguez">
-    <meta name="keywords" content="client, RoT, Republic-of-Techies">
-    <meta name="description" content="Client program">
+    <meta name="keywords" content="client, Pi, RoT, Raspberry, Republic-of-Techies">
+    <meta name="description" content="Simple client program">
     
     <title>Simple Client Program</title>
     
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="styles/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="styles/client.css">
+    <link rel="stylesheet" type="text/css" href="bin/cssmenu/styles.css">
     
+    <!-- Libraries -->
     <script src="bin/jquery-2.1.4.min.js"></script>
     <script src="bin/jquery-ui-1.11.4/jquery-ui.min.js"></script>
     <script src="bin/jquery.ajax-cross-origin.min.js"></script>
+    <script src="bin/FileSaver.js"></script>
     <script src="bin/client.js"></script>
+    <script src="bin/cssmenu/script.js"></script>
     
   </head>
   
   <body>
   
+    <!-- Third party menu: http://cssmenumaker.com/jquery-menus -->
+    <div id='cssmenu'>
+      <ul>
+        <li class='active has-sub'><a href='#'><span>File</span></a>
+          <ul>
+            <li class='has-sub' id="config_mni"><a href='#'><span>Config File</span></a>
+              <ul>
+                <li id="load_config_mni"><a href='#'><span>Load Config File</span></a></li>
+                <li id="save_config_mni" class='last'><a href='#'><span>Save Config File</span></a></li>
+              </ul>
+            </li>
+            <li class='has-sub' id="user_inputs_mni"><a href='#'><span>User Inputs</span></a>
+              <ul>
+                <li id="load_users_inputs_mni"><a href='#'><span>Load User Inputs</span></a></li>
+                <li id="save_users_inputs_mni" class='last'><a href='#'><span>Save User Inputs</span></a></li>
+              </ul>
+            </li>
+            <li class='has-sub' id="inputs_history_mni"><a href='#'><span>Inputs History</span></a>
+              <ul>
+                <li id="load_inputs_history_mni"><a href='#'><span>Load Inputs History</span></a></li>
+                <li id="save_inputs_history_mni" class='last'><a href='#'><span>Save Inputs History</span></a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a id="about" href='#'><span>About</span></a></li>
+      </ul>
+    </div>  
+    
     <div id="main">
     
       <div id="left-side">
@@ -34,10 +69,9 @@
         </textarea>
         <button type="button" id="submit_inputs">Submit inputs</button><br>
         <br>
-        <button type="button" id="load_inputs">Load inputs</button>
-        <button type="button" id="save_inputs">Save inputs</button>
-        <button type="button" id="load_config">Load Config</button>
-        
+        <br>
+        <input hidden type="file" id="load_file" accept="text/*" ><br>
+
       </div>
       
       <div id="right-side">
@@ -45,10 +79,26 @@
         <h2>Inputs History</h2>
         <textarea id="input2">
         </textarea>
-        <button type="button" id="save_history">Save History</button>
         
       </div>
-     
+      
+      <!-- "About" dialog. -->
+      <div id="about_dialog" title="About">
+        
+        <p>Client: version 1.0</p>
+        
+      </div>
+      
+      <!-- "Save" dialog. -->
+      <div id="save_dialog" title="Save As">
+        
+        <h2 id="saving_text">Saving file...</h2>
+        
+        <label>Filename:</label>
+        <input type="text" class="filename" id="text-filename" placeholder="">.txt
+        
+      </div>
+      
     </div>
     
   </body>

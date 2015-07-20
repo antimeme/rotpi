@@ -1,23 +1,25 @@
 /* Client's styles. */
 
+/* *** Panels *** */
+
 #main
 { 
   margin-top: 25px;
   margin-bottom: 25px;
-  margin-left: 25px;
+  margin-left: 15px;
   background: CornflowerBlue;
-  width: 700px;
-  height: 425px;
+  width: 800px;
+  height: 500px;
   border-radius: 25px;
 }
 
 #left-side    
 {
   width: 45%;
-  height: 400px;
+  height: 475px;
   background: LightGray;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 15px;
   margin-right: 10px;
   float: left;
   text-align: center;
@@ -27,7 +29,7 @@
 #right-side  
 {
   width: 49%;
-  height: 400px;
+  height: 475px;
   background: LightGray;
   margin-top: 10px;
   margin-left: 10px;
@@ -36,8 +38,44 @@
   border-radius: 25px;
 }
 
+
+/* *** Text Areas *** */
+
 #input1 { border-radius: 5px; border:1px solid #ccc; margin-left: 0px;
-          margin-bottom:5px; padding:0px; width:90%; height:60% }
-          
+          margin-bottom:5px; padding:0px; width:90%; height:75% }
+
 #input2 { border-radius: 5px; border:1px solid #ccc; margin-left: 0px;
-          margin-bottom:5px; padding:0px; width:90%; height:70% }
+          margin-bottom:5px; padding:0px; width:90%; height:80% }
+
+
+/* *** Dialogs *** */
+
+#about_dialog
+{
+  background-color: CornflowerBlue;
+  color: white;
+  margin: 0;
+}
+
+#save_dialog
+{
+  background-color: CornflowerBlue;
+  color: white;
+  margin: 0;
+}
+
+/* Align title of dialoge. */
+.ui-dialog .ui-dialog-titlebar
+{
+  float:none;
+  display: block;
+  text-align: center;
+}
+
+
+/* *** Buttons *** */
+
+button[type="button"]
+{
+  font-size: 75%;
+}
