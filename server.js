@@ -78,6 +78,9 @@
 		
 		//Listener page for LED AJAX calls.  Added by KevinGage
 		//Expects HTTP POST value called ledCommand
+		//Post data must be valid json calls separated by underscores
+		//example 1:  {"delay":millisecods, "ledNumber":bool}_{"delay":milliseconds, "ledNumer1":bool, "ledNumber2":bool}
+		//example 2:  {"delay":0, "17":true, "21":true}_{"delay":5000, "17":false, "21":false}_{etc...}
 		if (url == '/LED') {
 			if (request.method == 'POST') {
 				var postData = '';
@@ -98,17 +101,10 @@
 						ledCommand[i] = JSON.parse(ledCommand[i]);
 					}
 					
-					console.log("sending this command to led controller: " + ledCommand);
-					
 					ledController.LED(ledCommand, function (err) {
 						//return respond(response, 200, {"Context-Type": "text/plain"},err);
-						console.log("setting header");
 						response.writeHeader(200, {'Content-Type': 'text/plain'});
-						console.log("sending respsonse");
 						response.write(err);
-						console.log("ending response");
-						response.end();
-						console.log("returning");
 						return "";
 					});
 				});
