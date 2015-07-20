@@ -8,6 +8,8 @@
     var http = require('http');
     var fs = require('fs');
     var path = require('path');
+	var ledController = require('./ledController.js');
+	var qs = require('querystring');
     var port = 8080;
 
     // Responds to normal requests with control over headers
@@ -73,6 +75,41 @@
                 "Access-Control-Allow-Origin": "http://localhost"},
                            new Date().toString());
         }
+		
+		//Listener page for LED AJAX calls.  Added by KevinGage
+		//Expects HTTP POST value called ledCommand
+		//Post data must be valid json calls separated by underscores
+		//example 1:  {"delay":millisecods, "ledNumber":bool}_{"delay":milliseconds, "ledNumer1":bool, "ledNumber2":bool}
+		//example 2:  {"delay":0, "17":true, "21":true}_{"delay":5000, "17":false, "21":false}_{etc...}
+		if (url == '/LED') {
+			if (request.method == 'POST') {
+				var postData = '';
+				request.on('data', function (data) {
+					postData += data;
+
+					// Too much POST data, kill the connection!
+					if (postData.length > 1e6) {
+						request.connection.destroy();
+					}
+				});
+				request.on('end', function () {
+					var post = qs.parse(postData);
+
+					var ledCommand = post['ledCommand'].split("_");
+					
+					for (var i = 0; i < ledCommand.length; i++) {
+						ledCommand[i] = JSON.parse(ledCommand[i]);
+					}
+					
+					ledController.LED(ledCommand, function (err) {
+						//return respond(response, 200, {"Context-Type": "text/plain"},err);
+						response.writeHeader(200, {'Content-Type': 'text/plain'});
+						response.write(err);
+						return "";
+					});
+				});
+			}
+		}
 
         // Otherwise unrecognized URLs are treated as file paths
         fs.readFile(path.join('.', url), function (err, data) {
