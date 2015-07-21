@@ -1,3 +1,13 @@
+/*
+To do:
+1 auto scroll when divs are added?
+2 click a queue div to remove it
+3 click go prepare array
+4 click go send ajax
+5 output for errors
+6 more styling
+*/
+
 $(document).ready(function() {
 	
 	$(".led").click(function() { 
