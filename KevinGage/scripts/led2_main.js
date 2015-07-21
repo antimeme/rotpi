@@ -5,6 +5,11 @@ $(document).ready(function() {
 	});
 	
 	$("#add").click(function() {
+		
+		if (isNaN($("#delay").val())){
+			return;
+		}
+		
 		dwrapper=document.createElement('div');
 		d1=document.createElement('div');
 		d2=document.createElement('div');
