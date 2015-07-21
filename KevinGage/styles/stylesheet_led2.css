@@ -2,24 +2,34 @@
 	width: 75%;
 	z-index: 0;
 	float: left;
+	text-align: center;
 }
 #queue{
 	background-color: blue;
 	width: 25%;
 	float: right;
 }
+#go{
+	width: 100%;
+}
+#add{
+	display: block;
+	margin: auto;
+}
+#delay{
+	display: block;
+	margin: auto;
+}
 .led{
 	width: 200px;
 	height: 200px;
-	margin: 20px 20px 20px 20px;
 	z-index: 100;
 	background-size: 100% 100%;
-
+	margin: 10% 5%;
 	display: inline-block;
 }
 .off {
 	background-image: url("./img/ledOff.png");
-
 }
 .on{
 	background-image: url("./img/ledOn.png");
