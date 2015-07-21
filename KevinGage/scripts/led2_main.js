@@ -13,9 +13,15 @@ $(document).ready(function() {
 		
 		$(dwrapper).addClass("miniLedWrapper");
 		
-		$(d1).addClass("on");
-		$(d2).addClass("on");
-		$(d3).addClass("on");
+		if ($("#led1").hasClass("on")) {
+			$(d1).addClass("on");
+		}
+		if ($("#led2").hasClass("on")) {
+			$(d2).addClass("on");
+		}
+		if ($("#led3").hasClass("on")) {
+			$(d3).addClass("on");
+		}
 		
 		$(d1).addClass("miniLed");
 		$(d2).addClass("miniLed");
