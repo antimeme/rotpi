@@ -1,3 +1,6 @@
+p{
+	margin-bottom:0px;
+}
 #wrapper{
 	width: 75%;
 	z-index: 0;
@@ -27,6 +30,18 @@
 	background-size: 100% 100%;
 	margin: 10% 5%;
 	display: inline-block;
+}
+.miniLed{
+	width: 25px;
+	height: 25px;
+	z-index: 100;
+	background-size: 100% 100%;
+	margin: 0px 3px 0px 3px;
+	display: inline-block;
+}
+.miniLedWrapper{
+	width: 100%;
+	text-align: center;
 }
 .off {
 	background-image: url("./img/ledOff.png");
