@@ -6,6 +6,8 @@ p{
 	z-index: 0;
 	float: left;
 	text-align: center;
+	position:fixed;
+	top:0;
 }
 #queue{
 	background-color: blue;
