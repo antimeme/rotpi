@@ -5,12 +5,20 @@
 <link rel="stylesheet" type="text/css" href="styles/stylesheet_led1.css">
 <script type='text/javascript' src='scripts/jquery-2.1.4.min.js'></script>
 
+
+
+
+$.post( "test.php", { 'choices[]': [ "Jon", "Susan" ] } );
+
+
+
 <script>
 $(document).ready(function(){
 	$("button").click(function(){
+		var ledCommandArray = document.getElementById('ledCommand').value.split('_');
 		$.post("/LED",
 		{
-			ledCommand: document.getElementById('ledCommand').value
+			'ledCommand[]': ledCommandArray
 		},
 		function(data, status){
 			alert("Data: " + data + "\nStatus: " + status);

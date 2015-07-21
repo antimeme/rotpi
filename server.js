@@ -93,9 +93,16 @@
 					}
 				});
 				request.on('end', function () {
+					/*
 					var post = qs.parse(postData);
 
 					var ledCommand = post['ledCommand'].split("_");
+					*/
+					var post = qs.parse(postData);
+
+					var ledCommand = post['ledCommand'];
+					
+					console.log(ledCommand);
 					
 					for (var i = 0; i < ledCommand.length; i++) {
 						ledCommand[i] = JSON.parse(ledCommand[i]);
