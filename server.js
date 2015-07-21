@@ -78,9 +78,9 @@
 		
 		//Listener page for LED AJAX calls.  Added by KevinGage
 		//Expects HTTP POST value called ledCommand
-		//Post data must be valid json calls separated by underscores
-		//example 1:  {"delay":millisecods, "ledNumber":bool}_{"delay":milliseconds, "ledNumer1":bool, "ledNumber2":bool}
-		//example 2:  {"delay":0, "17":true, "21":true}_{"delay":5000, "17":false, "21":false}_{etc...}
+		//Post data must be valid json calls in an array
+		//example 1:  [ '{"delay":millisecods, "ledNumber":bool}','{"delay":milliseconds, "ledNumer1":bool, "ledNumber2":bool}']
+		//example 2:  [ '{"delay":0, "17":true, "21":true}','{"delay":5000, "17":false, "21":false}','{etc...}']
 		if (url == '/LED') {
 			if (request.method == 'POST') {
 				var postData = '';
@@ -93,14 +93,10 @@
 					}
 				});
 				request.on('end', function () {
-					/*
+
 					var post = qs.parse(postData);
 
-					var ledCommand = post['ledCommand'].split("_");
-					*/
-					var post = qs.parse(postData);
-
-					var ledCommand = post['ledCommand'];
+					var ledCommand = post['ledCommand[]'];
 					
 					console.log(ledCommand);
 					
