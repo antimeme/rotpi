@@ -73,7 +73,7 @@ $(document).ready(function() {
 		var ledState2 = $(mini2).hasClass("on");
 		var ledState3 = $(mini3).hasClass("on");
 		
-		ledCommandArray[0] = JSON.stringify({"delay":delayTime, led1:ledState1, led2:ledState2, led3:ledState3});
+		ledCommandArray[0] = JSON.stringify({"delay":delayTime * 1000, led1:ledState1, led2:ledState2, led3:ledState3});
 		
 		var previousLedState = "";
 		
@@ -92,14 +92,14 @@ $(document).ready(function() {
 			ledState2 = $(mini2).hasClass("on");
 			ledState3 = $(mini3).hasClass("on");
 			
-			ledCommandArray.push(JSON.stringify({"delay":delayTime, led1:ledState1, led2:ledState2, led3:ledState3}));
+			ledCommandArray.push(JSON.stringify({"delay":delayTime * 1000, led1:ledState1, led2:ledState2, led3:ledState3}));
 		}
 		
 		previousLedState = $( $('#queue').children().last() );
 		
 		delayTime = $( $(previousLedState).children()[0]).text();
 		
-		ledCommandArray.push(JSON.stringify({"delay":delayTime, led1:0, led2:0, led3:0}));
+		ledCommandArray.push(JSON.stringify({"delay":delayTime * 1000, led1:0, led2:0, led3:0}));
 		
 		alert(ledCommandArray);
 		
