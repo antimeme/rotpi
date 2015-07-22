@@ -101,6 +101,12 @@ $(document).ready(function() {
 		
 		ledCommandArray.push({"delay":delayTime, led1:0, led2:0, led3:0});
 		
-		alert(ledCommandArray);
+		$.post("/LED",
+		{
+			'ledCommand[]': ledCommandArray
+		},
+		function(data, status){
+			alert("Data: " + data + "\nStatus: " + status);
+		});
 	});
 });
