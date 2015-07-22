@@ -11,7 +11,7 @@ $(document).ready(function(){
 		var ledCommandArray = document.getElementById('ledCommand').value.split('_');
 		$.post("/LED",
 		{
-			'ledCommand[]': ledCommandArray
+			'ledCommand[]': ledCommandArray;
 		},
 		function(data, status){
 			alert("Data: " + data + "\nStatus: " + status);
