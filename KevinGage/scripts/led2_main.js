@@ -119,8 +119,6 @@ $(document).ready(function() {
 		
 		ledCommandArray.push(JSON.stringify(ledCommandObject));
 		
-		alert(ledCommandArray);
-		
 		$.post("/LED",
 		{
 			'ledCommand[]': ledCommandArray

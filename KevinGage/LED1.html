@@ -9,7 +9,7 @@
 $(document).ready(function(){
 	$("button").click(function(){
 		var ledCommandArray = document.getElementById('ledCommand').value.split('_');
-		alert(ledCommandArray);
+
 		$.post("/LED",
 		{
 			'ledCommand[]': ledCommandArray
