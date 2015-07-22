@@ -103,7 +103,8 @@ $(document).ready(function() {
 		
 		$.post("/LED",
 		{
-			'ledCommand[]': ledCommandArray;
+			alert(ledCommandArray);
+			'ledCommand[]': ledCommandArray
 		},
 		function(data, status){
 			alert("Data: " + data + "\nStatus: " + status);
