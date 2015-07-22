@@ -18,7 +18,7 @@ $(document).ready(function() {
 	
 	$("#add").click(function() {
 		
-		if (isNaN($("#delay").val())){
+		if (isNaN($("#delay").val()) || $("#delay").val() == ""){
 			return;
 		}
 		
