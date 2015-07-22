@@ -1,17 +1,50 @@
-#container{
-	width: 100%;
-	height: 100%;
+p{
+	margin-bottom:0px;
+}
+#wrapper{
+	width: 75%;
 	z-index: 0;
+	float: left;
+	text-align: center;
+	position:fixed;
+	top:0;
+}
+#queue{
+	width: 25%;
+	float: right;
+}
+#go{
+	width: 100%;
+}
+#add{
+	display: block;
+	margin: auto;
+}
+#delay{
+	display: block;
+	margin: auto;
 }
 .led{
 	width: 200px;
 	height: 200px;
 	z-index: 100;
 	background-size: 100% 100%;
-}
-.off {
+	margin: 10% 5%;
+	display: inline-block;
 	background-image: url("./img/ledOff.png");
-
+}
+.miniLed{
+	width: 25px;
+	height: 25px;
+	z-index: 100;
+	background-size: 100% 100%;
+	margin: 0px 3px 0px 3px;
+	display: inline-block;
+	background-image: url("./img/ledOff.png");
+}
+.miniLedWrapper{
+	width: 100%;
+	text-align: center;
 }
 .on{
 	background-image: url("./img/ledOn.png");
