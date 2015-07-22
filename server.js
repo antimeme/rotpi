@@ -84,12 +84,19 @@
                 else throw err;
             }
 
-             // :TODO: determine content type --
-            //   by file extension?
-            //   by contents?
-            //   a combination of both?
+            var ctype = 'text/plain';
+            var tmap = {
+                'html': 'text/html',
+                'css':  'text/css',
+                'png':  'image/png',
+                'jpeg': 'image/jpeg',
+                'jpg':  'image/jpeg',
+            };
+            var match = url.match(/\.([^.]*)$/);
+            if (match && match[1] in tmap)
+                ctype = tmap[match[1]];
             return respond(response, 200, {
-                'Content-Type': 'text/html'}, data);
+                'Content-Type': ctype}, data);
         });
     })).listen(port);
     console.log('Server listening: http://localhost:' + port + '/');
