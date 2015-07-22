@@ -101,9 +101,10 @@ $(document).ready(function() {
 		
 		ledCommandArray.push(JSON.stringify({"delay":delayTime, led1:0, led2:0, led3:0}));
 		
+		alert(ledCommandArray);
+		
 		$.post("/LED",
 		{
-			alert(ledCommandArray);
 			'ledCommand[]': ledCommandArray
 		},
 		function(data, status){
