@@ -54,9 +54,9 @@ $(document).ready(function() {
 		$("#queue").append(dwrapper);
 		
 		$(dwrapper).hover(function() {
-			$(this).animate({'border': '5px solid black'}, slow);
+			$(this).css({border: '0 solid black'}).animate({borderWidth: 4}, 500);
 		}, function() {
-			$(this).animate({'border': 'none'}, slow);
+			$(this).animate({borderWidth: 0}, 500);
 		});
 	
 		$(dwrapper).click(function() {
