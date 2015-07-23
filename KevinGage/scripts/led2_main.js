@@ -1,16 +1,13 @@
 /*
 To do:
-1 auto scroll when divs are added?
-2 output for errors
-3 more styling
+1 output for errors
+2 more styling
 */
 var led1 = "17";
 var led2 = "22";
 var led3 = "19";
 
 $(document).ready(function() {
-	
-
 	
 	$(".led").click(function() { 
 		$(this).toggleClass("on");
@@ -62,6 +59,8 @@ $(document).ready(function() {
 		$(dwrapper).click(function() {
 			$(this).remove();
 		});
+		
+		$('html,body').animate({scrollTop: $(document).height()}, 600);
 	});
 	
 	$("#go").click(function() { 
