@@ -104,6 +104,9 @@
 						}
 						catch (ex) {
 							err = "Error parsing post json: " + ledCommand[i] + "Error: " + ex;
+							response.writeHeader(200, {'Content-Type': 'text/plain'});
+							response.write(err);
+							return "";
 						}
 					}
 					
