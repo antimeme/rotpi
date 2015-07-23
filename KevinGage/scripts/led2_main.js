@@ -1,16 +1,24 @@
 /*
 To do:
 1 auto scroll when divs are added?
-2 click a queue div to remove it
-3 click go send ajax
-4 output for errors
-5 more styling
+2 output for errors
+3 more styling
 */
 var led1 = "17";
 var led2 = "22";
 var led3 = "19";
 
 $(document).ready(function() {
+	
+	$(".miniLedWrapper").hover(function() {
+		$(this).animate({'border': '5px solid black'}, slow);
+	}, function() {
+		$(this).animate({'border': 'none'}, slow);
+	});
+	
+	$(".miniLedWrapper").click(function() {
+		$(this).remove();
+	});
 	
 	$(".led").click(function() { 
 		$(this).toggleClass("on");
