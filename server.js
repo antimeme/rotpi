@@ -99,7 +99,12 @@
 					var ledCommand = post['ledCommand[]'];
 					
 					for (var i = 0; i < ledCommand.length; i++) {
-						ledCommand[i] = JSON.parse(ledCommand[i]);
+						try {
+							ledCommand[i] = JSON.parse(ledCommand[i]);
+						}
+						catch (ex) {
+							err = "Error parsing post json: " + ledCommand[i] + "Error: " + ex;
+						}
 					}
 					
 					ledController.LED(ledCommand, function (err) {
