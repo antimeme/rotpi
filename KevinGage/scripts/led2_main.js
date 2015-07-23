@@ -10,15 +10,7 @@ var led3 = "19";
 
 $(document).ready(function() {
 	
-	$(".miniLedWrapper").hover(function() {
-		$(this).animate({'border': '5px solid black'}, slow);
-	}, function() {
-		$(this).animate({'border': 'none'}, slow);
-	});
-	
-	$(".miniLedWrapper").click(function() {
-		$(this).remove();
-	});
+
 	
 	$(".led").click(function() { 
 		$(this).toggleClass("on");
@@ -60,6 +52,16 @@ $(document).ready(function() {
 		$(dwrapper).append(d3);
 	
 		$("#queue").append(dwrapper);
+		
+		$(dwrapper).hover(function() {
+			$(this).animate({'border': '5px solid black'}, slow);
+		}, function() {
+			$(this).animate({'border': 'none'}, slow);
+		});
+	
+		$(dwrapper).click(function() {
+			$(this).remove();
+		});
 	});
 	
 	$("#go").click(function() { 
